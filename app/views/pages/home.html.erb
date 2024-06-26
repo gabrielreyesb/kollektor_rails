@@ -1,0 +1,107 @@
+<% content_for :sidebar do %>
+    <%= image_tag "logo.png", alt: "", class: "img-fluid w-40 p-2"%>
+    <hr class="border-light"> 
+    <div class="px-4">
+        <h6 class="text-white text-uppercase">FILTROS DE COLECCIÓN</h6>
+        <div class="form-group">
+            <label for="genreSelect" class="text-white">Género</label>
+            <select class="form-control" id="genreSelect">
+                <option selected>Todos</option>
+                <% Genre.all.each do |genre| %>
+                    <option value="<%= genre.id %>"><%= genre.name %></option>
+                <% end %>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="artistSelect" class="text-white">Artista</label>
+            <select class="form-control" id="artistSelect">
+                <option selected>Todos</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="albumSelect" class="text-white">Álbum</label>
+            <select class="form-control" id="albumSelect">
+                <option selected>Todos</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="yearSelect" class="text-white">Año</label>
+            <select class="form-control" id="yearSelect">
+                <option selected>Todos</option>
+            </select>
+        </div>
+    </div>
+<% end %>
+
+<div id="mainContent" class="container-fluid"> 
+    <div class="row mt-4"> 
+        <div class="col-md-12">
+            <div class="d-flex align-items-center">
+                <div class="logo-container">
+                    <%= image_tag "music.png", alt: "", class: "img-fluid" %> 
+                </div> 
+                <div class="ml-3">
+                    <h2 class="text-primary">Collección de música</h2> 
+                </div>
+            </div>
+        </div>
+        <hr class="w-100">
+    </div>
+
+    <div class="floating-crud-btn-container">
+        <button class="btn btn-primary floating-crud-btn" type="button" id="crudDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-plus"></i>  
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="crudDropdown">
+            <button class="dropdown-item" type="button" data-toggle="modal" data-target="#genreModal">Géneros</button>
+            <a class="dropdown-item" href="#">Autores</a>
+            <a class="dropdown-item" href="#">Albums</a>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <%= image_tag "Pink_floy_Dark_side.jpeg", class: "card-img-top", alt: "Image 1" %>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <%= image_tag "king_crimson_inthecourt.jpeg", class: "card-img-top", alt: "Image 2" %>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <%= image_tag "genesis_foxtrot.jpeg", class: "card-img-top", alt: "Image 2" %>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <%= image_tag "KBB_Lost_and_found.jepg.jpg", class: "card-img-top", alt: "Image 2" %>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <%= image_tag "le_orme_uomodipezza.jpeg", class: "card-img-top", alt: "Image 2" %>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="genreModal" tabindex="-1" role="dialog" aria-labelledby="genreModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="genreModalLabel">Administración de Géneros</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

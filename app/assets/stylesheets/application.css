@@ -1,0 +1,59 @@
+@import "bootstrap";
+
+#sidebar {
+  width: 280px;
+  height: 100vh;
+  background-color: #00a2ff;
+  position: fixed;
+}
+
+#sidebar .nav-link, /* For the "Mis Colecciones" links */
+#sidebar .form-control, /* For the dropdown background */
+#sidebar .dropdown-toggle::after {
+  color: white;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -5px;
+}
+
+.card {
+  margin: 5px;
+}
+
+#mainContent {
+  margin-left: 20px; /* Adjust the value as needed */
+}
+
+@media (max-width: 991px) {
+  #sidebar {
+    position: static;
+    width: 100%; /* Make the sidebar take full width on smaller screens */
+    height: auto;
+  }
+
+  #mainContent {
+    padding-left: 0; /* Remove left padding on smaller screens */
+  }
+}
+
+#mainContent .logo-container img {
+  width: 150px;
+  height: auto; 
+}
+
+.floating-crud-btn-container {
+  position: fixed;
+  top: 20px; 
+  right: 20px;
+  z-index: 1000;
+}
+
+.btn.floating-crud-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #00a2ff;
+}

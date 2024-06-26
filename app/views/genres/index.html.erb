@@ -1,0 +1,26 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Géneros</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th colspan="2"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+    <% @genres.each do |genre| %>
+      <tr>
+        <td><%= genre.name %></td>
+        <td><%= link_to 'Show', genre %></td>
+        <td><%= link_to 'Edit', edit_genre_path(genre) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New genre', new_genre_path %>
