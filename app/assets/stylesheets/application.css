@@ -57,3 +57,7 @@
   border-radius: 50%;
   background-color: #00a2ff;
 }
+
+.form-control {
+  color: rgb(0, 0, 0) !important;
+}
