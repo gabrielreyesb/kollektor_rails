@@ -1,0 +1,4 @@
+<%= turbo_stream.remove @genre %>
+<%= turbo_stream.update "genre_modal" do %> 
+    <%= render partial: "genres/form", locals: { genre: Genre.new } %>
+<% end %>

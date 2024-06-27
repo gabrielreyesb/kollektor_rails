@@ -1,0 +1,12 @@
+<% if @genre.save %>
+<%= turbo_stream.prepend "genres" do %>
+  <%= render partial: 'genre', locals: { genre: @genre } %>
+<% end %>
+<%= turbo_stream.update "genre_modal" do %> 
+   <%= render partial: "genres/form", locals: { genre: Genre.new } %>
+<% end %>
+<% else %>
+<%= turbo_stream.update "genre_modal" do %>
+  <%= render partial: "genres/form", locals: { genre: @genre } %>
+<% end %>
+<% end %>
