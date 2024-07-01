@@ -1,40 +1,47 @@
-<% content_for :sidebar do %>
-    <%= image_tag "logo.png", alt: "", class: "img-fluid w-40 p-2"%>
-    <hr class="border-light"> 
-    <div class="px-2">
-        <h5 class="text-white text-uppercase">FILTROS DE COLECCIÓN</h6>
-        <br>
-        <div class="form-group">
-            <label for="genreSelect" class="text-white">Género</label>
-            <select class="form-control" id="genreSelect">
-                <option selected>Todos</option>
-                <% Genre.all.each do |genre| %>
-                    <option value="<%= genre.id %>"><%= genre.name %></option>
+<% if action_name == 'home' %>
+    <% content_for :sidebar do %>
+        <%= image_tag "logo.png", alt: "", class: "img-fluid w-40 p-2"%>
+        <hr class="border-light"> 
+        <div class="px-2">
+            <h5 class="text-white text-uppercase">FILTROS DE COLECCIÓN</h6>
+            <br>
+            <div class="form-group">
+                <label for="genreSelect" class="text-white">Género</label>
+                <%= form_tag home_path, method: :get do %>
+                    <%= select_tag 'genre', options_from_collection_for_select(@genres, 'id', 'name', params[:genre]), 
+                        class: 'form-control', include_blank: 'Todos', 
+                        onchange: 'this.form.submit()' %>
                 <% end %>
-            </select>
+            </div>
+            <div class="form-group">
+                <label for="artistSelect" class="text-white">Artista</label>
+                <select class="form-control" id="artistSelect">
+                    <option selected>Todos</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="albumSelect" class="text-white">Álbum</label>
+                <select class="form-control" id="albumSelect">
+                    <option value="">Todos</option>
+                    <% if params[:genre] && params[:genre] != '' %>
+                        <% Album.where(genre_id: params[:genre]).each do |album| %>
+                            <option value="<%= album.id %>"><%= album.name %></option>
+                        <% end %>
+                    <% else %>
+                        <% Album.all.each do |album| %>
+                            <option value="<%= album.id %>"><%= album.name %></option>
+                        <% end %>
+                    <% end %>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="yearSelect" class="text-white">Año</label>
+                <select class="form-control" id="yearSelect">
+                    <option selected>Todos</option>
+                </select>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="artistSelect" class="text-white">Artista</label>
-            <select class="form-control" id="artistSelect">
-                <option selected>Todos</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="albumSelect" class="text-white">Álbum</label>
-            <select class="form-control" id="albumSelect">
-                <option selected>Todos</option>
-                <% Album.all.each do |album| %>
-                    <option value="<%= album.id %>"><%= album.name %></option>
-                <% end %>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="yearSelect" class="text-white">Año</label>
-            <select class="form-control" id="yearSelect">
-                <option selected>Todos</option>
-            </select>
-        </div>
-    </div>
+    <% end %>
 <% end %>
 
 <div id="mainContent" class="container-fluid"> 
@@ -46,7 +53,7 @@
                     <%= image_tag "music.png", alt: "", class: "img-fluid" %> 
                 </div> 
                 <div class="ml-3">
-                    <h2 class="text-primary">Collección de música</h2> 
+                    <h2 class="text-primary">Colección de música</h2> 
                 </div>
             </div>
         </div>
@@ -67,31 +74,17 @@
     
     <!-- Grid de imágebnes -->
     <div class="row">
+        <% @albums.each do |album| %>
         <div class="col-md-4">
             <div class="card">
-                <%= image_tag "Pink_floy_Dark_side.jpeg", class: "card-img-top", alt: "Image 1" %>
+                <% if album.cover_image.attached? %>
+                    <%= image_tag album.cover_image, class: "card-img-top", alt: "Image 1" %>
+                <% else %>
+                    <img src="default_image.jpg" class="card-img-top" alt="Imagen por defecto">
+                <% end %>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card">
-                <%= image_tag "king_crimson_inthecourt.jpeg", class: "card-img-top", alt: "Image 2" %>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <%= image_tag "genesis_foxtrot.jpeg", class: "card-img-top", alt: "Image 2" %>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <%= image_tag "KBB_Lost_and_found.jepg.jpg", class: "card-img-top", alt: "Image 2" %>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <%= image_tag "le_orme_uomodipezza.jpeg", class: "card-img-top", alt: "Image 2" %>
-            </div>
-        </div>
+  <% end %>
     </div>
 
     <!-- Ventana para dar de alta un género -->

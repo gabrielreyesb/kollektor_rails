@@ -1,30 +1,35 @@
-<p style="color: green"><%= notice %></p>
+<div id="mainContent" class="container-fluid"> 
+  <p style="color: green"><%= notice %></p>
 
-<h1>Géneros</h1>
-<table>
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th colspan="2"></th>
-  </tr>
-  </thead>
-  <tbody>
-    <% @genres.each do |genre| %>
-      <tr>
-        <td><%= genre.name %></td>
-        <td><%= link_to 'Show', genre %></td>  
-        <td><%= link_to 'Edit', edit_genre_path(genre) %></td> 
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <h1>Géneros</h1>
+  <table>
 
-<br>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="2"></th>
+    </tr>
+    </thead>
 
-<div>
-  <%= link_to 'New genre', new_genre_path, class: "btn btn-secondary" %>
-</div>
-<br>
-<div>
-  <%= link_to "Volver a la colección", root_path, class: "btn btn-secondary" %>
+    <tbody>
+      <% @genres.each do |genre| %>
+        <tr>
+          <td><%= genre.name %></td>
+          <td><%= link_to 'Ver', genre %></td>  
+          <td><%= link_to 'Editar', edit_genre_path(genre) %></td> 
+        </tr>
+      <% end %>
+    </tbody>
+
+  </table>
+
+  <br>
+
+  <div>
+    <%= link_to 'Agregar género', new_genre_path, class: "btn btn-secondary" %>
+  </div>
+  <br>
+  <div>
+    <%= link_to "Volver a la colección", root_path, class: "btn btn-secondary" %>
+  </div>
 </div>

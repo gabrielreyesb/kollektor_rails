@@ -5,6 +5,7 @@ class CreateAlbums < ActiveRecord::Migration[7.1]
       t.integer :year
       t.integer :genre_id
       t.integer :author_id
+      t.references :genre, null: false, foreign_key: true
 
       t.timestamps
     end

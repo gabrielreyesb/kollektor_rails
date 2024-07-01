@@ -3,8 +3,8 @@
 <%= render @genre %>
 
 <div>
-  <%= link_to "Edit this genre", edit_genre_path(@genre) %> |
-  <%= link_to "Back to genres", genres_path %>
+  <%= link_to "Editar", edit_genre_path(@genre) %> |
+  <%= link_to "Regresar", genres_path %>
 
-  <%= button_to "Destroy this genre", @genre, method: :delete %>
+  <%= button_to "Borrar", @genre, method: :delete %>
 </div>

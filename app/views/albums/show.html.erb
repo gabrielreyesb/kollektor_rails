@@ -1,6 +1,7 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @album %>
+<%= image_tag url_for(@album.cover_image) if @album.cover_image.attached? %> 
 
 <div>
   <%= link_to "Edit this album", edit_album_path(@album) %> |
