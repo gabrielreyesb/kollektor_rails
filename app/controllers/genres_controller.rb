@@ -19,6 +19,9 @@ class GenresController < ApplicationController
     @genre = Genre.new(genre_params)
     respond_to do |format|
       if @genre.save
+        if params[:genre][:genre_image].present?
+          @genre.genre_image.attach(params[:genre][:genre_image])
+        end
         format.html { redirect_to genre_url(@genre)}
         format.json { render :show, status: :created, location: @genre }
       else
@@ -31,6 +34,10 @@ class GenresController < ApplicationController
   def update
     respond_to do |format|
       if @genre.update(genre_params)
+        if params[:genre][:genre_image].present?
+          @genre.genre_image.purge
+          @genre.genre_image.attach(params[:genre][:genre_image])
+        end
         format.html { redirect_to genre_url(@genre)}
         format.json { render :show, status: :ok, location: @genre }
       else

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_01_194841) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_09_004801) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -42,18 +42,28 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_01_194841) do
   create_table "albums", force: :cascade do |t|
     t.string "name"
     t.integer "year"
-    t.integer "genre_id"
-    t.integer "author_id"
+    t.integer "genre_id", null: false
+    t.integer "artist_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["artist_id"], name: "index_albums_on_artist_id"
+    t.index ["genre_id"], name: "index_albums_on_genre_id"
   end
 
-  create_table "genres", force: :cascade do |t|
+  create_table "artists", force: :cascade do |t|
     t.string "name"
+    t.integer "genre_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["genre_id"], name: "index_artists_on_genre_id"
   end
+
+# Could not dump table "genres" because of following StandardError
+#   Unknown type 'attachment' for column 'genre_image'
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "albums", "artists"
+  add_foreign_key "albums", "genres"
+  add_foreign_key "artists", "genres"
 end

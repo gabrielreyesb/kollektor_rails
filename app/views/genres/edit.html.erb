@@ -1,11 +1,13 @@
-<p style="color: green"><%= notice %></p>
+<div id="mainContent" class="container-fluid"> 
+  <p style="color: green"><%= notice %></p>
 
-<h1>Edición de genero</h1>
+  <h1>Edición de genero</h1>
 
-<%= render "form", genre: @genre %>
+  <%= render "form", genre: @genre %>
 
-<div>
-  <br>
-  <%= link_to "Ver género", @genre %> |
-  <%= link_to "Regresar a géneros", genres_path %>
+  <div>
+    <br>
+    <%= link_to "Ver género", @genre %> |
+    <%= link_to "Regresar a géneros", genres_path %>
+  </div>
 </div>

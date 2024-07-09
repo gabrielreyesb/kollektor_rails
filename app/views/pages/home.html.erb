@@ -13,12 +13,23 @@
                         onchange: 'this.form.submit()' %>
                 <% end %>
             </div>
+
             <div class="form-group">
                 <label for="artistSelect" class="text-white">Artista</label>
                 <select class="form-control" id="artistSelect">
                     <option selected>Todos</option>
+                    <% if params[:genre] && params[:genre] != '' %>
+                        <% Artist.where(genre_id: params[:genre]).each do |artist| %>
+                            <option value="<%= artist.id %>"><%= artist.name %></option>
+                        <% end %>
+                    <% else %>
+                        <% Artist.all.each do |artist| %>
+                            <option value="<%= artist.id %>"><%= artist.name %></option>
+                        <% end %>
+                    <% end %>
                 </select>
             </div>
+
             <div class="form-group">
                 <label for="albumSelect" class="text-white">Álbum</label>
                 <select class="form-control" id="albumSelect">
@@ -66,21 +77,23 @@
             <i class="fas fa-plus"></i>  
         </button>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="crudDropdown">
-            <a class="dropdown-item" href="/genres/index">Géneros</a>
-            <a class="dropdown-item" href="#">Autores</a>
-            <a class="dropdown-item" href="#">Albums</a>
+            <%= link_to 'Géneros', genres_path, class: 'dropdown-item' %>
+            <div class="dropdown-divider"></div> 
+            <%= link_to 'Artistas', artists_path, class: 'dropdown-item' %>
+            <div class="dropdown-divider"></div> 
+            <%= link_to 'Albums', albums_path, class: 'dropdown-item' %>
         </div>
     </div>
     
     <!-- Grid de imágebnes -->
     <div class="row">
         <% @albums.each do |album| %>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="card">
                 <% if album.cover_image.attached? %>
                     <%= image_tag album.cover_image, class: "card-img-top", alt: "Image 1" %>
                 <% else %>
-                    <img src="default_image.jpg" class="card-img-top" alt="Imagen por defecto">
+                    <img src="default.jpg" class="card-img-top" alt="Imagen por defecto">
                 <% end %>
             </div>
         </div>

@@ -11,12 +11,17 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="form-group"> 
+    <%= form.label :genre_image %>
+    <%= form.file_field :genre_image, class: "form-control-file" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Crear género", class: "btn btn-primary" %>
   </div>
 <% end %>

@@ -10,13 +10,19 @@ class AlbumsController < ApplicationController
 
   def new
     @album = Album.new
+    @genres = Genre.all
+    @artists = Artist.all
   end
 
   def edit
+    @genres = Genre.all
+    @artists = Artist.all
   end
 
   def create
     @album = Album.new(album_params)
+    @genres = Genre.all
+    @artists = Artist.all
 
     respond_to do |format|
       if @album.save
@@ -56,6 +62,11 @@ class AlbumsController < ApplicationController
     end
 
     def album_params
-      params.require(:album).permit(:name, :year, :genre_id, :author_id, :cover_image)
+      params.require(:album).permit(:name, :year, :genre_id, :artist_id, :cover_image)
+    end
+
+    def set_genres_and_artists
+      @genres = Genre.all
+      @artists = Artist.all
     end
 end

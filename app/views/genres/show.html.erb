@@ -1,10 +1,12 @@
-<p style="color: green"><%= notice %></p>
+<div id="mainContent" class="container-fluid"> 
+  <p style="color: green"><%= notice %></p>
 
-<%= render @genre %>
+  <%= render @genre %>
 
-<div>
-  <%= link_to "Editar", edit_genre_path(@genre) %> |
-  <%= link_to "Regresar", genres_path %>
+  <div>
+    <%= link_to "Editar", edit_genre_path(@genre) %> |
+    <%= link_to "Regresar", genres_path %>
 
-  <%= button_to "Borrar", @genre, method: :delete %>
+    <%= button_to "Borrar", @genre, method: :delete %>
+  </div>
 </div>

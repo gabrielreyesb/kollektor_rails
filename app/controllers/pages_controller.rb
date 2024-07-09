@@ -8,6 +8,12 @@ class PagesController < ApplicationController
           else
             @albums = Album.all
         end
+
+        if params[:artist] && params[:artist] != ''
+            @albums = Album.where(artist_id: params[:artist])
+          else
+            @albums = Album.all
+          end
     end
 
     def about

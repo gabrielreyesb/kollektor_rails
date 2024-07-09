@@ -1,11 +1,13 @@
-<p style="color: green"><%= notice %></p>
+<div id="mainContent" class="container-fluid"> 
+  <p style="color: green"><%= notice %></p>
 
-<%= render @album %>
-<%= image_tag url_for(@album.cover_image) if @album.cover_image.attached? %> 
+  <%= render @album %>
+  <%= image_tag url_for(@album.cover_image) if @album.cover_image.attached? %> 
 
-<div>
-  <%= link_to "Edit this album", edit_album_path(@album) %> |
-  <%= link_to "Back to albums", albums_path %>
+  <div>
+    <%= link_to "Edit this album", edit_album_path(@album) %> |
+    <%= link_to "Back to albums", albums_path %>
 
-  <%= button_to "Destroy this album", @album, method: :delete %>
+    <%= button_to "Destroy this album", @album, method: :delete %>
+  </div>
 </div>
