@@ -3,4 +3,5 @@ class Artist < ApplicationRecord
   has_many :albums
 
   validates :genre, presence: true
+  has_one_attached :artist_image
 end

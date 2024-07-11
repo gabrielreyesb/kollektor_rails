@@ -35,6 +35,11 @@ class ArtistsController < ApplicationController
   def update
     respond_to do |format|
       if @artist.update(artist_params)
+        if params[:artist][:remove_artist_image] == '1'
+          @artist.artist_image.purge
+        elsif params[:artist][:artist_image].present?
+          @artist.artist_image.attach(params[:artist][:artist_image])
+        end
         format.html { redirect_to artist_url(@artist), notice: "Artist was successfully updated." }
         format.json { render :show, status: :ok, location: @artist }
       else
@@ -59,7 +64,7 @@ class ArtistsController < ApplicationController
     end
 
     def artist_params
-      params.require(:artist).permit(:name, :genre_id)
+      params.require(:artist).permit(:name, :genre_id, :artist_image, :remove_artist_image)
     end
 
     def set_genres

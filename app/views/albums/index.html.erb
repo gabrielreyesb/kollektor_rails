@@ -1,34 +1,41 @@
-<div id="mainContent" class="container-fluid"> 
-  <p style="color: green"><%= notice %></p>
 
-  <h1>Albums</h1>
-  <table>
-    <thead>
-    <tr>
-      <th>Nombre</th>
-      <th colspan="5"></th>
-    </tr>
-    </thead>
-    <tbody>
-      <% @albums.each do |album| %>
-        <tr>
-          <td><%= album.name %></td>
-          <td><%= album.year %></td>
-          <td><%= album.genre_id %></td>
-          <td><%= album.artist_id %></td>
-          <td><%= link_to 'Ver', album %></td>  
-          <td><%= link_to 'Editar', edit_album_path(album) %></td> 
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
 
-  <br>
-  <div>
-    <%= link_to "New album", new_album_path, class: "btn btn-secondary" %>
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Albums</h1>
+
+  <% if notice.present? %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <%= notice %>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <% @albums.each do |album| %>
+      <div class="col-md-4 mb-3">
+        <div class="card h-100">
+          <% if album.cover_image.attached? %>
+            <%= image_tag url_for(album.cover_image), class: "card-img-top", alt: "Imagen de #{album.name}" %>
+          <% else %>
+            <%= image_tag image_path("default.jpg"), class: "card-img-top", alt: "Imagen por defecto" %>
+          <% end %>
+          <div class="card-body d-flex flex-column align-items-center">
+            <h5 class="card-title"><%= album.name %></h5>
+            <p class="card-text">Album: <%= album.genre&.name || "Sin género" %></p> <%# Safe navigation for genre %>
+            <div class="mt-auto">
+              <%= link_to 'Ver', album, class: 'btn btn-outline-primary btn-sm' %>
+              <%= link_to 'Editar', edit_album_path(album), class: 'btn btn-outline-secondary btn-sm' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
-  <br>
-  <div>
-    <%= link_to "Volver a la colección", root_path, class: "btn btn-secondary" %>
+
+  <div class="d-flex justify-content-between mt-4"> 
+    <%= link_to 'Nuevo album', new_album_path, class: 'btn btn-primary' %>
+    <%= link_to "Volver a la colección", root_path, class: "btn btn-primary" %>
   </div>
 </div>
