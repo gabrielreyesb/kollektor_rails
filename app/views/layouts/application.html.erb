@@ -19,14 +19,24 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
     
     <div class="d-flex">
-        <div id="sidebar">
+      <div id="sidebar" class="fixed-top" style="height: 100vh; overflow-y: auto;">
+        <% unless controller_name == 'genres' %>
           <%= yield :sidebar %>  
-        </div>
+        <% end %>
+
+        <% if controller_name == 'albums' && action_name != 'show' %>
+          <div class="mt-auto px-2">
+            <br>
+            <%= link_to 'Nuevo album', new_album_path, class: 'custom-button' %>
+            <br><br>
+            <%= link_to "Volver a la colección", root_path, class: 'custom-button' %>
+          </div>
+        <% end %>
+      </div>
 
       <div id="mainContent" class="container-fluid" style="padding-left: 250px;">
         <%= yield %> 
       </div>
     </div>
-
-  </body>
+  </body> 
 </html>

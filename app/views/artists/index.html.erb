@@ -13,7 +13,7 @@
 
   <div class="row">
     <% @artists.each do |artist| %>
-      <div class="col-md-4 mb-3">
+      <div class="col-md-2 mb-3">
         <div class="card h-100">
           <% if artist.artist_image.attached? %>
             <%= image_tag url_for(artist.artist_image), class: "card-img-top", alt: "Imagen de #{artist.name}" %>

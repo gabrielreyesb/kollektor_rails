@@ -1,11 +1,13 @@
 
 <% if action_name == 'home' %>
     <% content_for :sidebar do %>
+      <div class="d-flex flex-column" style="height: 100%;"> <%# Add flex container %>
         <%= image_tag "logo.png", alt: "", class: "img-fluid w-40 p-2"%>
         <hr class="border-light"> 
         <div class="px-2">
             <h5 class="text-white text-uppercase">FILTROS DE COLECCIÓN</h6>
             <br>
+            
             <div class="form-group">
                 <label for="genreSelect" class="text-white">Género</label>
                 <%= form_tag home_path, method: :get do %>
@@ -14,7 +16,7 @@
                         onchange: 'this.form.submit()' %>
                 <% end %>
             </div>
-
+            
             <div class="form-group">
                 <label for="artistSelect" class="text-white">Artista</label>
                 <select class="form-control" id="artistSelect">
@@ -30,7 +32,21 @@
                     <% end %>
                 </select>
             </div>
+          </div>
+
+          <hr>
+          <div class="px-2 mt-auto">
+            <br>
+            <%= form_tag home_path, method: :get do %>
+              <div class="form-group">
+                <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: 'Buscar por nombre de álbum' %>
+              </div>
+              <%= submit_tag 'Buscar album', class: 'custom-button' %>
+            <% end %>
+          </div>
+
         </div>
+      </div>
     <% end %>
 <% end %>
 
@@ -67,13 +83,16 @@
     <!-- Grid de imágebnes -->
     <div class="row">
         <% @albums.each do |album| %>
-          <div class="col-md-3 album-card" data-artist-id="<%= album.artist_id %>">
+          <div class="col-md-2 album-card" data-artist-id="<%= album.artist_id %>">
             <div class="card">
               <% if album.cover_image.attached? %>
                 <%= image_tag album.cover_image, class: "card-img-top", alt: "Image 1" %>
               <% else %>
-                <img src="default.jpg" class="card-img-top" alt="Imagen por defecto">
+                <%= image_tag image_path("default.jpg"), class: "card-img-top", alt: "Imagen por defecto" %>
               <% end %>
+              <div class="card-footer">
+                <p class="card-text text-center"><%= album.name %> (<%= album.year %>)</p> 
+              </div>
             </div>
           </div>
         <% end %>
