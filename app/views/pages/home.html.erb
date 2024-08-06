@@ -1,4 +1,5 @@
 
+  <!-- Sidebar -->
 <% if action_name == 'home' %>
     <% content_for :sidebar do %>
       <div class="d-flex flex-column" style="height: 100%;"> <%# Add flex container %>
@@ -33,38 +34,31 @@
                 </select>
             </div>
           </div>
-
-          <hr>
-          <div class="px-2 mt-auto">
-            <br>
-            <%= form_tag home_path, method: :get do %>
-              <div class="form-group">
-                <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: 'Buscar por nombre de álbum' %>
-              </div>
-              <%= submit_tag 'Buscar album', class: 'custom-button' %>
-            <% end %>
-          </div>
-
         </div>
       </div>
     <% end %>
 <% end %>
 
-  <!-- Encabezado -->
+<!-- Contenido principal -->
 <div id="mainContent" class="container-fluid"> 
-    <div class="row mt-4"> 
-        <div class="col-md-12">
-            <div class="d-flex align-items-center">
-                <div class="logo-container">
-                    <%= image_tag "music.png", alt: "", class: "img-fluid" %> 
-                </div> 
-                <div class="ml-3">
-                    <h2 class="text-primary">Colección de música</h2> 
+    
+    <!-- Envabezado -->
+    <div class="sticky-top bg-white pt-1">
+        <div class="row mt-4"> 
+            <div class="col-md-12">
+                <div class="d-flex align-items-center justify-content-center">
+                    <div class="logo-container">
+                        <%= image_tag "music.png", alt: "", class: "img-fluid" %> 
+                    </div> 
+
+                    <div class="ml-5">
+                        <h2 class="text-primary">Colección de música</h2> 
+                    </div>
                 </div>
             </div>
+            <hr class="w-100 border-dark">
         </div>
-        <hr class="w-100 border-dark">
-    </div>
+      </div>
 
     <!-- Botón CRUD -->
     <div class="floating-crud-btn-container">
@@ -80,7 +74,7 @@
         </div>
     </div>
     
-    <!-- Grid de imágebnes -->
+    <!-- Grid de imágenes -->
     <div class="row">
         <% @albums.each do |album| %>
           <div class="col-md-2 album-card" data-artist-id="<%= album.artist_id %>">

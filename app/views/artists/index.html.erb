@@ -1,6 +1,12 @@
 
 <div class="container mt-5">
-  <h1 class="text-center mb-4">Artistas</h1>
+  <h1 class="text-center mb-4">Artistas y compositores</h1>
+  <div class="d-flex justify-content-between mt-4"> 
+    <%= link_to 'Nuevo artista', new_artist_path, class: 'btn btn-outline-primary btn-sm' %>
+    <%= link_to "Volver a la colección", root_path, class: "btn btn-outline-primary btn-sm" %>
+  </div>
+  <hr>
+  <br>
 
   <% if notice.present? %>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -31,10 +37,5 @@
         </div>
       </div>
     <% end %>
-  </div>
-
-  <div class="d-flex justify-content-between mt-4"> 
-    <%= link_to 'Nuevo artista', new_artist_path, class: 'btn btn-primary' %>
-    <%= link_to "Volver a la colección", root_path, class: "btn btn-primary" %>
   </div>
 </div>

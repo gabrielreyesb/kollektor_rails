@@ -5,6 +5,7 @@ require 'open-uri'
 
 class AlbumsController < ApplicationController
   before_action :set_album, only: %i[ show edit update destroy ]
+  layout 'crud', only: [:index, :new, :edit] 
 
   def index
     @albums = Album.all
@@ -13,16 +14,15 @@ class AlbumsController < ApplicationController
   def home
     @genres = Genre.all
     @albums = if params[:genre] && params[:artist]
-                Album.where(genre_id: params[:genre], artist_id: params[:artist]).order(year: :asc)
+                Album.where(genre_id: params[:genre], artist_id: params[:artist])
               elsif params[:genre]
-                Album.where(genre_id: params[:genre]).order(year: :asc)
+                Album.where(genre_id: params[:genre])
               elsif params[:artist]
-                Album.where(artist_id: params[:artist]).order(year: :asc)
-              elsif params[:search]
-                Album.where("name LIKE ?", "%#{params[:search]}%").order(year: :asc)
+                Album.where(artist_id: params[:artist])
               else
-                Album.all.order(year: :asc)
+                Album.all
               end
+    @albums = @albums.order(year: :asc).limit(5)
   end
     
   def show
@@ -37,6 +37,7 @@ class AlbumsController < ApplicationController
   def edit
     @genres = Genre.all
     @artists = Artist.all
+    @album = Album.find(params[:id])
   end
 
   def create
@@ -70,7 +71,7 @@ class AlbumsController < ApplicationController
   def update
     respond_to do |format|
       if @album.update(album_params)
-        format.html { redirect_to album_url(@album), notice: "Album was successfully updated." }
+        format.html { redirect_to album_url(@album), notice: "El album fue actualizado correctamente" }
         format.json { render :show, status: :ok, location: @album }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -81,20 +82,25 @@ class AlbumsController < ApplicationController
 
   def destroy
     @album.destroy!
-
     respond_to do |format|
-      format.html { redirect_to albums_url, notice: "Album was successfully destroyed." }
-      format.json { head :no_content }
+      if @album.destroy
+        format.html { redirect_to albums_url}
+        format.json { head :no_content }
+      else
+        format.html { render :destroy, status: :unprocessable_entity }
+        format.json { render json: @album.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   private
     def set_album
       @album = Album.find(params[:id])
+      redirect_to albums_path, alert: "Album not found" if @album.nil?
     end
 
     def album_params
-      params.require(:album).permit(:name, :year, :genre_id, :artist_id, :cover_image)
+      params.require(:album).permit(:name, :year, :genre_id, :artist_id, :cover_image, :comments)
     end
 
     def fetch_album_cover(album_title, artist_name, download_path)

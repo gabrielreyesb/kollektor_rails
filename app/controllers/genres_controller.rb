@@ -1,5 +1,6 @@
 class GenresController < ApplicationController
   before_action :set_genre, only: %i[ show edit update destroy ]
+  layout 'crud', only: [:index, :new, :edit] 
 
   def index
     @genres = Genre.all

@@ -1,5 +1,6 @@
 class ArtistsController < ApplicationController
-  before_action :set_artist, only: %i[ show edit update destroy ]
+  #before_action :set_artist, only: %i[ show edit update destroy ]
+  layout 'crud', only: [:index, :new, :edit] 
 
   def index
     @artists = Artist.all

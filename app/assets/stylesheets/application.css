@@ -46,7 +46,7 @@
 
 .floating-crud-btn-container {
   position: fixed;
-  top: 20px; 
+  bottom: 20px; 
   right: 20px;
   z-index: 1000;
 }
@@ -62,8 +62,10 @@
   color: rgb(0, 0, 0) !important;
 }
 
-.px-2.mt-auto {
+.search_form {
   margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
 }
 
 .custom-button {
@@ -72,6 +74,6 @@
   color: black;
   border: none;
   padding: 5px 20px;
-  margin-left: 60px;
   box-shadow: 0px 6px 4px rgba(0, 0, 0, 0.5);
+  width: 260px;
 }
